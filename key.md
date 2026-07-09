@@ -1,0 +1,5 @@
+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
+
+
+export GROQ_API_KEY="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"
+java GroqClient
