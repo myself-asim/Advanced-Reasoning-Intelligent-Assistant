@@ -7,7 +7,7 @@ import java.util.Scanner;
 class GroqClient {
 
     private static final String SYSTEM_PROMPT = """
-        You are ARIN (Adaptive Reasoning Intelligent Assistant), the core intelligence of HAB (Human-like Assistant Brain).
+        You are ARIN (Adaptive Response Intelligent Assistant), the core intelligence of HAB (Human-like Assistant Brain).
 
         You are a capable personal AI assistant designed to help the user solve problems, learn new concepts, analyze information, and automate workflows.
 
@@ -29,24 +29,14 @@ class GroqClient {
 
     private final HttpClient client = HttpClient.newHttpClient();
     private final Scanner scanner = new Scanner(System.in);
-    
+    private final FileHandling fileHandler = new FileHandling();
 
-    /**
-     * Runs one turn: reads input, calls Groq, returns the reply text.
-     * Returns null when the user wants to exit.
-     */
-    public String requestToGroq() throws Exception {
+    // ---------- Used by the GUI ----------
+    // Takes plain text in, gives plain text back. No console stuff here.
+    public String sendPrompt(String userInput) throws Exception {
         String apiKey = System.getenv("GROQ_API_KEY");
         if (apiKey == null || apiKey.isBlank()) {
             return "Set GROQ_API_KEY environment variable first.";
-        }
-
-        System.out.print("YOU >> ");
-        String userInput = scanner.nextLine();
-        System.out.print("\n");
-
-        if (userInput.equalsIgnoreCase("exit")) {
-            return null;
         }
 
         String jsonBody = "{\"model\":\"llama-3.3-70b-versatile\",\"messages\":["
@@ -72,7 +62,8 @@ class GroqClient {
         if (content == null) {
             return "Couldn't parse Groq response. Raw body:\n" + body;
         }
-
+        
+        fileHandler.writeToFile("\nYOU: " + userInput + "\nARIN: " + content);
         return content;
     }
 
@@ -80,7 +71,7 @@ class GroqClient {
         scanner.close();
     }
 
-    /** Escapes a string for safe embedding in a JSON string literal, per the JSON spec. */
+    // Turns special characters into safe JSON escapes.
     private static String escapeJson(String s) {
         StringBuilder sb = new StringBuilder(s.length() + 16);
         for (int i = 0; i < s.length(); i++) {
@@ -105,11 +96,7 @@ class GroqClient {
         return sb.toString();
     }
 
-    /**
-     * Finds the first "content":"..." field and decodes JSON escapes properly,
-     * including \\uXXXX sequences and escaped backslashes.
-     * Returns null if it can't find/parse the field.
-     */
+    // Pulls the reply text out of Groq's raw JSON response.
     private static String extractContent(String body) {
         String marker = "\"content\":\"";
         int start = body.indexOf(marker);

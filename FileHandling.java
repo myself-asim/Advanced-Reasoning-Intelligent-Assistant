@@ -6,9 +6,8 @@ class FileHandling {
     
     public void writeToFile(String text){
 
-        try (FileWriter writer = new FileWriter("Chat.txt", true)) {
-            writer.write("=================================================================================\n");
-            writer.write(text + '\n');
+        try (FileWriter writer = new FileWriter("Chat_Logging.txt", true)) {
+            writer.write(text);
         } catch (IOException e) {
             System.err.print("Error: " + e.getMessage());
             e.printStackTrace();
@@ -17,7 +16,7 @@ class FileHandling {
 
     public void readFromFile(){
 
-        try (FileReader reader = new FileReader("Chat.txt")) {
+        try (FileReader reader = new FileReader("Chat_Logging.txt")) {
             reader.read();
         } catch (IOException e) {
             System.err.print("Error: " + e.getMessage());

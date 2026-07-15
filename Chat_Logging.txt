@@ -1,0 +1,77 @@
+YOU: hello
+ARIN: Hello. How can I assist you today?
+YOU: Hello
+ARIN: Hello. How can I assist you today?
+YOU: are you ready for final year project
+ARIN: I'm ready to assist you with your final year project. What topic have you chosen, and how can I help?
+YOU: it's good to hear that
+ARIN: I'm here to help. What's on your mind, or how can I assist you today?
+YOU: i wanna make a chatbot
+ARIN: To get started, what programming language and platform are you interested in using (e.g., Python, Node.js, Dialogflow)?
+YOU: python
+ARIN: What would you like to know about Python? (e.g., syntax, libraries, frameworks, or a specific task)
+YOU: i want you to write a program in python which tell the user exactly their age
+ARIN: **Age Calculator Program in Python**
+```python
+from datetime import datetime
+
+def calculate_age(birth_date):
+    """
+    Calculate the age based on the birth date.
+    
+    Args:
+        birth_date (str): The user's birth date in YYYY-MM-DD format.
+    
+    Returns:
+        int: The user's age.
+    """
+    today = datetime.today()
+    birth_date = datetime.strptime(birth_date, "%Y-%m-%d")
+    age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+    return age
+
+def main():
+    birth_date = input("Enter your birth date (YYYY-MM-DD): ")
+    age = calculate_age(birth_date)
+    print(f"You are {age} years old.")
+
+if __name__ == "__main__":
+    main()
+```
+**Usage:**
+
+1. Run the program.
+2. Enter your birth date in YYYY-MM-DD format when prompted.
+3. The program will display your exact age.
+
+**Note:** This program assumes that the user's birth date is in the past. If the user's birth date is in the future, the program will not work correctly.
+YOU: ts to good
+ARIN: Typos happen. What's on your mind today? Need help with something?
+YOU: nothing
+ARIN: It seems like you didn't have a specific question or task in mind. What would you like to talk about or work on? I'm here to help.
+YOU: exit
+ARIN: Exiting our conversation. Goodbye.
+YOU: exit
+ARIN: Exiting our conversation. Goodbye.
+YOU: hello bruh
+ARIN: Hello. How can I assist you today?
+YOU: what is the day today
+ARIN: I'm not aware of the current date as my knowledge cutoff is December 2023. However, I can suggest ways for you to find out the current date, such as checking your device's clock or searching online.
+YOU: really
+ARIN: Is there something I can help you with?
+YOU: jadsf
+ARIN: It seems like you may have entered a random string of characters. Could you please rephrase or provide more context so I can better assist you?
+YOU: jlas
+ARIN: It seems like "jlas" might be a typo or an unclear term. Could you please provide more context or clarify what you mean by "jlas"? I'm here to help with any questions or topics you'd like to discuss.
+YOU: jdal;
+ARIN: It seems like there was a typo or unclear input. Could you please rephrase or provide more context? I'm here to help.
+YOU: lasf
+ARIN: It seems like there's a typo. Could you please rephrase or provide more context? I'm here to help.
+YOU: jfals
+ARIN: It seems like you may have made a typo or provided an unclear input. Could you please rephrase or provide more context so I can better understand and assist you?
+YOU: ajlskf
+ARIN: It seems like you've entered a random string of characters. How can I assist you today?
+YOU: jladsf
+ARIN: It seems like you've entered a string of random characters. Could you please provide more context or clarify what you're trying to accomplish? I'm here to help.
+YOU: fasjlf
+ARIN: It seems like you may have entered a string of random characters. Could you please provide more context or rephrase your inquiry so I can better assist you?
